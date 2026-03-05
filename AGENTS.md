@@ -1,8 +1,5 @@
 # Repository Guidelines
 
-> **Fork context:** This is a personal fork. See [`REPO-FORK.md`](REPO-FORK.md) for branch structure,
-> upstream sync workflow, and active patches. See [`CLAUDE.md`](CLAUDE.md) for agent-specific rules.
-
 ## Project Structure
 
 - `cmd/gog/`: CLI entrypoint.
@@ -50,3 +47,57 @@
 
 - Never commit OAuth client credential JSON files or tokens.
 - Prefer OS keychain backends; use `GOG_KEYRING_BACKEND=file` + `GOG_KEYRING_PASSWORD` only for headless environments.
+
+---
+
+## Fork Context (pa-prod only — not submitted upstream)
+
+> This section is specific to the personal fork at [peteradams2026/gogcli](https://github.com/peteradams2026/gogcli).
+> See [`REPO-FORK.md`](REPO-FORK.md) for the full branch structure and sync workflow.
+
+### Branch Rules
+
+| Branch | Rule |
+|--------|------|
+| `main` | **Never commit here.** Only `git merge --ff-only upstream/main`. |
+| `feat/*` | Feature work for upstream PR. Keep clean and minimal — no fork meta-docs. |
+| `pa-prod` | Our integration branch. OK to add meta-docs, personal patches, cherry-picks. |
+
+When asked to implement a feature for a PR: work on `feat/<name>`, branched off `main`.  
+When asked to maintain the fork or update docs: work on `pa-prod`.
+
+### Building the Local Binary
+
+```bash
+cd ~/ws/gogcli-pa-prod   # or ~/ws/gogcli on pa-prod worktree
+make
+cp bin/gog ~/.local/bin/gog   # takes precedence over homebrew gog
+```
+
+### Active Feature Patches on pa-prod
+
+| Branch | Issue | PR | Status |
+|--------|-------|----|--------|
+| `feat/extra-scopes` | [#420](https://github.com/steipete/gogcli/issues/420) | [#421](https://github.com/steipete/gogcli/pull/421) | ⏳ PR open |
+
+### Files Private to This Fork (Never Include in Upstream PRs)
+
+- `REPO-FORK.md` — fork management guide
+- This "Fork Context" section of `AGENTS.md`
+
+Do not cherry-pick or include these in any `feat/*` branch submitted to `steipete/gogcli`.
+
+### PR Checklist (before pushing a feature branch upstream)
+
+- [ ] Branched off latest `main` (not `pa-prod`)
+- [ ] `make ci` passes
+- [ ] Smoke-tested with `--dry-run`
+- [ ] `CHANGELOG.md` entry added under `## Unreleased`
+- [ ] No private files or fork-context sections included in the diff
+
+### After Upstream Merges Our PR
+
+1. `git fetch upstream && git checkout main && git merge --ff-only upstream/main`
+2. `git checkout pa-prod && git rebase main` (Git auto-drops already-applied cherry-picks)
+3. Remove from "Active Feature Patches" table above
+4. Rebuild: `make && cp bin/gog ~/.local/bin/gog`
