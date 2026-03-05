@@ -107,7 +107,7 @@ git checkout pa-prod && git rebase main
 
 | Branch | Issue | PR | Status |
 |--------|-------|----|--------|
-| `feat/extra-scopes` | [#420](https://github.com/steipete/gogcli/issues/420) | TBD | 🚧 In progress |
+| `feat/extra-scopes` | [#420](https://github.com/steipete/gogcli/issues/420) | [#421](https://github.com/steipete/gogcli/pull/421) | ⏳ PR open |
 
 *(Update this table as branches are added/merged)*
 

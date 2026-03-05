@@ -23,7 +23,7 @@ This is a personal fork of [steipete/gogcli](https://github.com/steipete/gogcli)
 
 ## Our Active Features (Patches on pa-prod)
 
-- `feat/extra-scopes` — adds `--extra-scopes` flag to `gog auth add` ([issue #420](https://github.com/steipete/gogcli/issues/420))
+- `feat/extra-scopes` — adds `--extra-scopes` flag to `gog auth add` ([issue #420](https://github.com/steipete/gogcli/issues/420) / [PR #421](https://github.com/steipete/gogcli/pull/421))
 
 ## Building
 
