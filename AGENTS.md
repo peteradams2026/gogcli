@@ -1,5 +1,8 @@
 # Repository Guidelines
 
+> **Fork context:** This is a personal fork. See [`REPO-FORK.md`](REPO-FORK.md) for branch structure,
+> upstream sync workflow, and active patches. See [`CLAUDE.md`](CLAUDE.md) for agent-specific rules.
+
 ## Project Structure
 
 - `cmd/gog/`: CLI entrypoint.
